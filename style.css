@@ -1,0 +1,26 @@
+:root {
+  --cell-width: 14vw;
+  --cell-height: var(--cell-width);
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+}
+
+.gameboard-grid {
+  display: grid;
+  grid-template-columns: repeat(3, var(--cell-width));
+  grid-template-rows: repeat(3, var(--cell-height));
+  place-content: center;
+}
+
+.cell {
+  width: var(--cell-width);
+  height: var(--cell-height);
+  border: 1px solid black;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
