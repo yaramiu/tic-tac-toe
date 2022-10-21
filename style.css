@@ -24,3 +24,14 @@
   justify-content: center;
   align-items: center;
 }
+
+button {
+  width: var(--cell-width);
+  height: var(--cell-height);
+  background-color: white;
+  font-size: 8rem;
+}
+
+button:hover {
+  background-color: gray;
+}
