@@ -1,6 +1,7 @@
 :root {
   --cell-width: 14vw;
   --cell-height: var(--cell-width);
+  --diagonal-line-length: 20vw;
 }
 
 .header {
@@ -34,4 +35,78 @@ button {
 
 button:hover {
   background-color: gray;
+}
+
+.top.left.win .horizontal.line,
+.top.left.win .vertical.line,
+.top.left.win .diagonal.line,
+.top.center.win .horizontal.line,
+.top.center.win .vertical.line,
+.top.right.win .horizontal.line,
+.top.right.win .vertical.line,
+.top.right.win .diagonal.line,
+.middle.left.win .horizontal.line,
+.middle.left.win .vertical.line,
+.middle.center.win .horizontal.line,
+.middle.center.win .vertical.line,
+.middle.center.win .diagonal.line,
+.middle.right.win .horizontal.line,
+.middle.right.win .vertical.line,
+.bottom.left.win .horizontal.line,
+.bottom.left.win .vertical.line,
+.bottom.left.win .diagonal.line,
+.bottom.center.win .horizontal.line,
+.bottom.center.win .vertical.line,
+.bottom.right.win .horizontal.line,
+.bottom.right.win .vertical.line,
+.bottom.right.win .diagonal.line {
+  height: 1vh;
+  background-color: red;
+  position: absolute;
+  z-index: 1;
+}
+
+.top.left.win .diagonal.line,
+.middle.center.win .diagonal.line,
+.bottom.right.win .diagonal.line,
+.bottom.left.win .diagonal.line,
+.top.right.win .diagonal.line {
+  width: var(--diagonal-line-length);
+}
+
+.top.left.win .downward.diagonal.line,
+.middle.center.win .downward.diagonal.line,
+.bottom.right.win .downward.diagonal.line {
+  transform: rotate(45deg);
+}
+
+.bottom.left.win .upward.diagonal.line,
+.middle.center.win .upward.diagonal.line,
+.top.right.win .upward.diagonal.line {
+  transform: rotate(135deg);
+}
+
+.top.left.win .horizontal.line,
+.top.center.win .horizontal.line,
+.top.right.win .horizontal.line,
+.middle.left.win .horizontal.line,
+.middle.center.win .horizontal.line,
+.middle.right.win .horizontal.line,
+.bottom.left.win .horizontal.line,
+.bottom.center.win .horizontal.line,
+.bottom.right.win .horizontal.line {
+  width: var(--cell-width);
+}
+
+.top.left.win .vertical.line,
+.top.center.win .vertical.line,
+.top.right.win .vertical.line,
+.middle.left.win .vertical.line,
+.middle.center.win .vertical.line,
+.middle.right.win .vertical.line,
+.bottom.left.win .vertical.line,
+.bottom.center.win .vertical.line,
+.bottom.right.win .vertical.line {
+  width: var(--cell-height);
+  transform: rotate(90deg);
 }
