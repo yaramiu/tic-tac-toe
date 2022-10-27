@@ -94,8 +94,6 @@ const gameBoard = (() => {
       result = [true, false, 2, "upward-diagonal"];
     } else {
       if (isBoardFull()) {
-        console.log(gameboard);
-        console.log("board is full");
         result = [false, true, 0, ""];
       } else {
         result = [false, false, 0, ""];
@@ -120,8 +118,22 @@ const gameBoard = (() => {
 })();
 
 const displayController = (() => {
+  const newGameButton = document.querySelector(".new-game");
+  const topLeftCell = document.querySelector(".top.left");
+  const topCenterCell = document.querySelector(".top.center");
+  const topRightCell = document.querySelector(".top.right");
+  const middleLeftCell = document.querySelector(".middle.left");
+  const middleCenterCell = document.querySelector(".middle.center");
+  const middleRightCell = document.querySelector(".middle.right");
+  const bottomLeftCell = document.querySelector(".bottom.left");
+  const bottomCenterCell = document.querySelector(".bottom.center");
+  const bottomRightCell = document.querySelector(".bottom.right");
+  const playerOneInfoDiv = document.querySelector(".player-one.info");
+  const playerTwoInfoDiv = document.querySelector(".player-two.info");
   const gameboardGrid = document.querySelector(".gameboard-grid");
   const gameboardCells = gameboardGrid.children;
+  let firstPlayerName = "";
+  let secondPlayerName = "";
   let turn = 1;
   const MAX_TURNS = 9;
   let isGameFinished = false;
@@ -137,20 +149,55 @@ const displayController = (() => {
 
   const clearGameboardDisplay = () => {
     gameBoard.reset();
+    resetGameboardStyle();
+    playerOneInfoDiv.lastElementChild.textContent = "";
+    playerTwoInfoDiv.lastElementChild.textContent = "";
     showGameboardDisplay();
   };
 
-  const styleGameboardDisplay = (winningPosition) => {
-    const topLeftCell = document.querySelector(".top.left");
-    const topCenterCell = document.querySelector(".top.center");
-    const topRightCell = document.querySelector(".top.right");
-    const middleLeftCell = document.querySelector(".middle.left");
-    const middleCenterCell = document.querySelector(".middle.center");
-    const middleRightCell = document.querySelector(".middle.right");
-    const bottomLeftCell = document.querySelector(".bottom.left");
-    const bottomCenterCell = document.querySelector(".bottom.center");
-    const bottomRightCell = document.querySelector(".bottom.right");
+  const resetGameboardStyle = () => {
+    topLeftCell.lastElementChild.classList.remove("horizontal");
+    topLeftCell.lastElementChild.classList.remove("vertical");
+    topLeftCell.lastElementChild.classList.remove("diagonal");
 
+    topCenterCell.lastElementChild.classList.remove("horizontal");
+    topCenterCell.lastElementChild.classList.remove("vertical");
+
+    topRightCell.lastElementChild.classList.remove("horizontal");
+    topRightCell.lastElementChild.classList.remove("vertical");
+    topRightCell.lastElementChild.classList.remove("diagonal");
+
+    middleLeftCell.lastElementChild.classList.remove("horizontal");
+    middleLeftCell.lastElementChild.classList.remove("vertical");
+
+    middleCenterCell.lastElementChild.classList.remove("horizontal");
+    middleCenterCell.lastElementChild.classList.remove("vertical");
+    middleCenterCell.lastElementChild.classList.remove("diagonal");
+
+    middleRightCell.lastElementChild.classList.remove("horizontal");
+    middleRightCell.lastElementChild.classList.remove("vertical");
+
+    bottomLeftCell.lastElementChild.classList.remove("horizontal");
+    bottomLeftCell.lastElementChild.classList.remove("vertical");
+    bottomLeftCell.lastElementChild.classList.remove("diagonal");
+
+    bottomCenterCell.lastElementChild.classList.remove("horizontal");
+    bottomCenterCell.lastElementChild.classList.remove("vertical");
+
+    bottomRightCell.lastElementChild.classList.remove("horizontal");
+    bottomRightCell.lastElementChild.classList.remove("vertical");
+    bottomRightCell.lastElementChild.classList.remove("diagonal");
+  };
+
+  const styleWinnerHeader = (winningPlayer) => {
+    if (winningPlayer === 1) {
+      playerOneInfoDiv.lastElementChild.textContent = "WINNER";
+    } else if (winningPlayer === 2) {
+      playerTwoInfoDiv.lastElementChild.textContent = "WINNER";
+    }
+  };
+
+  const styleGameboardDisplay = (winningPosition) => {
     switch (winningPosition) {
       case "top-horizontal":
         topLeftCell.classList.add("win");
@@ -227,7 +274,34 @@ const displayController = (() => {
     }
   };
 
+  const initializeNewGameButton = () => {
+    newGameButton.addEventListener("click", () => {
+      clearGameboardDisplay();
+      turn = 1;
+      isGameFinished = false;
+      ticTacToe();
+    });
+  };
+
+  const displayPlayerInfo = (firstPlayer, secondPlayer) => {
+    const playerOneNameHeader = playerOneInfoDiv.firstElementChild;
+    playerOneNameHeader.textContent = firstPlayer.name;
+    const playerTwoNameHeader = playerTwoInfoDiv.firstElementChild;
+    playerTwoNameHeader.textContent = secondPlayer.name;
+  };
+
   const ticTacToe = () => {
+    firstPlayerName = prompt(
+      "What is the first player's name? They will be denoted with the mark X and will go first"
+    );
+    const firstPlayer = player(firstPlayerName, "X", true);
+    secondPlayerName = prompt(
+      "What is the second player's name? They will be denoted with the mark O and will go second"
+    );
+    const secondPlayer = player(secondPlayerName, "O", false);
+
+    displayPlayerInfo(firstPlayer, secondPlayer);
+
     for (let index = 0; index < gameboardCells.length; index++) {
       const gameboardCell = gameboardCells[index];
       const gameboardCellContent = gameboardCell.children[0];
@@ -251,17 +325,19 @@ const displayController = (() => {
               const winningPosition = result[3];
 
               if (winningPlayer === 1) {
-                alert("Player 1 has won");
+                alert(`${firstPlayerName} has won`);
               } else if (winningPlayer === 2) {
-                alert("Player 2 has won");
+                alert(`${secondPlayerName} has won`);
               }
               styleGameboardDisplay(winningPosition);
+              styleWinnerHeader(winningPlayer);
               isGameFinished = true;
             }
 
             const hasPlayersTied = result[1];
             if (hasPlayersTied) {
               alert("The game has ended in a tie");
+              isGameFinished = true;
             }
           }
         }
@@ -270,10 +346,8 @@ const displayController = (() => {
   };
 
   return {
-    showGameboardDisplay,
-    clearGameboardDisplay,
-    ticTacToe,
+    initializeNewGameButton,
   };
 })();
 
-displayController.ticTacToe();
+displayController.initializeNewGameButton();

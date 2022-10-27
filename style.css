@@ -26,14 +26,14 @@
   align-items: center;
 }
 
-button {
+button.cell {
   width: var(--cell-width);
   height: var(--cell-height);
   background-color: white;
   font-size: 8rem;
 }
 
-button:hover {
+button.cell:hover {
   background-color: gray;
 }
 
@@ -109,4 +109,40 @@ button:hover {
 .bottom.right.win .vertical.line {
   width: var(--cell-height);
   transform: rotate(90deg);
+}
+
+button.new-game {
+  width: 10vw;
+  height: 5vh;
+  background-color: lightgray;
+  font-weight: bold;
+  border: 1px solid black;
+  border-radius: 8px;
+  position: absolute;
+  right: 4vw;
+  bottom: 2vh;
+}
+
+button.new-game:hover {
+  width: 12vw;
+  height: 6vh;
+}
+
+button.new-game:active {
+  background-color: gray;
+}
+
+.player-one.info,
+.player-two.info {
+  font-size: 2rem;
+  position: absolute;
+  top: 2vh;
+}
+
+.player-one.info {
+  left: 4vw;
+}
+
+.player-two.info {
+  right: 2vw;
 }
