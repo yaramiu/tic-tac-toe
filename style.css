@@ -144,5 +144,12 @@ button.new-game:active {
 }
 
 .player-two.info {
-  right: 2vw;
+  right: 4vw;
+}
+
+.player-one.info .name,
+.player-two.info .name,
+.player-one.info .win-status,
+.player-two.info .win-status {
+  font-weight: bold;
 }

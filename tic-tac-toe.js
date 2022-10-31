@@ -189,7 +189,7 @@ const displayController = (() => {
     bottomRightCell.lastElementChild.classList.remove("diagonal");
   };
 
-  const styleWinnerHeader = (winningPlayer) => {
+  const styleWinnerParagraph = (winningPlayer) => {
     if (winningPlayer === 1) {
       playerOneInfoDiv.lastElementChild.textContent = "WINNER";
     } else if (winningPlayer === 2) {
@@ -284,10 +284,10 @@ const displayController = (() => {
   };
 
   const displayPlayerInfo = (firstPlayer, secondPlayer) => {
-    const playerOneNameHeader = playerOneInfoDiv.firstElementChild;
-    playerOneNameHeader.textContent = firstPlayer.name;
-    const playerTwoNameHeader = playerTwoInfoDiv.firstElementChild;
-    playerTwoNameHeader.textContent = secondPlayer.name;
+    const playerOneNameParagraph = playerOneInfoDiv.firstElementChild;
+    playerOneNameParagraph.textContent = firstPlayer.name;
+    const playerTwoNameParagraph = playerTwoInfoDiv.firstElementChild;
+    playerTwoNameParagraph.textContent = secondPlayer.name;
   };
 
   const ticTacToe = () => {
@@ -330,7 +330,7 @@ const displayController = (() => {
                 alert(`${secondPlayerName} has won`);
               }
               styleGameboardDisplay(winningPosition);
-              styleWinnerHeader(winningPlayer);
+              styleWinnerParagraph(winningPlayer);
               isGameFinished = true;
             }
 
